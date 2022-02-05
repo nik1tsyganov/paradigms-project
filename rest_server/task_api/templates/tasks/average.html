@@ -1,0 +1,51 @@
+{% extends "tasks/base.html" %} {% csrf_token %} {% block title %} Project Statistics Dashboard {% endblock title %} {% block content %}
+<div class="container-fluid">
+    <div>
+        <h1> Average Time Spent Across All Tasks </h1>
+        <div class="shadow-lg p-3 mb-3 bg-light text-dark rounded-3">
+            {% if weeks %}
+                <strong>Average time by week across all projects and tasks:</strong>
+                <select class="form-control" name="week_select" id="week_select" onchange="displayWeek()">
+                    <option disabled selected value> -- Select an option -- </option>
+                    {% if weeks %}
+                        {% for key, val in weeks.items %}
+                            <option value='{{ val }}'>{{ key }}</option>
+                            <h2>{{ val }} </h2>
+                        {% endfor %}
+                    {% else %} {% endif %}
+                </select>
+                <p id="week_display">The average amount of time spent per task for the week and year chosen is: </p>
+                <strong>Average time by month across all tasks:</strong>
+                <select class="form-control" name="month_select" id="month_select" onchange="displayMonth()">
+                    <option disabled selected value> -- Select an option -- </option>
+                    {% if months %}
+                        {% for key, val in months.items %}
+                            <option value='{{ val }}'>{{ key }}</option>
+                        {% endfor %}
+                    {% else %} {% endif %}
+                </select>
+                <p id="month_display">The average amount of time spent per task for the month and year chosen is: </p>
+            {% else %}
+                <p> No time entries are available, so time averages cannot be calculated! </p>
+            {% endif %}
+        </div>
+        <script>
+            function displayWeek(){
+                let week_select = document.getElementById("week_select");       
+                let week_display = document.getElementById("week_display");       
+                let selected_val = week_select.options[week_select.selectedIndex].value;
+                week_display.innerHTML = "The average amount of time spent per task for the week and year chosen is: " + selected_val;
+            }
+        </script>
+        <script>
+            function displayMonth(){
+                let month_select = document.getElementById("month_select");       
+                let month_display = document.getElementById("month_display");       
+                let selected_val = month_select.options[month_select.selectedIndex].value;
+                month_display.innerHTML = "The average amount of time spent per task for the month and year chosen is: " + selected_val;  
+            }
+        </script>
+    </div>
+</div>
+
+{% endblock %}
