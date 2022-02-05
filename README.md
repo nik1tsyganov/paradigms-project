@@ -1,4 +1,4 @@
-# paradigms-final-project
+# Paradigms Project
 
 ## Connor Shields, Nikita Tsyganov, Anna Fischer
 # About The Project
