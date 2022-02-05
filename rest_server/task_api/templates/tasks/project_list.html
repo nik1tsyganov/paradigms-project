@@ -1,0 +1,26 @@
+{% extends "tasks/base.html" %} {% block title %}Project Manager{% endblock title %} {% block content %}
+<div class="container-fluid">
+    <div class="shadow-lg p-3 mb-3 bg-light text-dark rounded-3">
+        <input type="button" class="mt-3 btn btn-success mb-2" onclick="location.href='/projects/projects_create';" value="Create a new project" />
+        <input type="button" class="mt-3 btn btn-success mb-2" onclick="location.href='/projects/average';" value="Calculate average time" />
+    </div>
+</div>
+{% if projects %}
+<ul>
+    {% for project in projects %}
+    <div class="container-fluid">
+        <div>
+            <h3> Project Details </h3>
+            <h5> Project: {{project.project_name}} </h5>
+            <input type="button" class="mt-3 btn btn-success mb-2" onclick="location.href='/projects/{{ project.id }}/project_stats';" value="See project statistics" />
+            <input type="button" class="mt-3 btn btn-success mb-2" onclick="location.href='/projects/{{ project.id }}/tasks';" value="See task list" />
+            <input type="button" class="mt-3 btn btn-success mb-2" onclick="location.href='/projects/{{ project.id }}/delete';" value="Delete project" />
+            <input type="button" class="mt-3 btn btn-success mb-2" onclick="window.location='/projects/{{ project.id }}/tasks/create';" value=" Add New Task Entry "> </input>
+        </div>
+    </div>
+
+    {% endfor %}
+</ul>
+{% else %}
+<h2>There are no projects!</h2>
+{% endif %} {% endblock content %}
